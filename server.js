@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config({ path: './config.env' });
 
 mongoose
-    .connect(process.env.DATABASE_LOCAL)
+    .connect(process.env.DATABASE_URL)
     .then(()=>{
         console.log("Connection to database successfull");
     })
@@ -11,7 +11,7 @@ mongoose
         console.log("Connection to database unsuccessfull");
     });
 
-const port = 4400;
+const port = process.env.PORT
 app.listen(port,()=>{
     console.log(`Listening on port ${port}`);
 })
