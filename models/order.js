@@ -1,8 +1,9 @@
+// order.js
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    user_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-    checkout_info: {
+    user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    shipping_address: {
         recipient_name: { type: String, maxlength: 255 },
         recipient_phone: { type: String, maxlength: 20 },
         city: { type: String, maxlength: 100 },
@@ -10,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         ward: { type: String, maxlength: 100 },
         address: { type: String, maxlength: 255 }
     },
-    order_date: { type: Date },
+    order_date: { type: Date, default: Date.now },
     payment_shipment: {
         payment_method: { type: String, maxlength: 100 },
         shipment_method: { type: String, maxlength: 255 },
@@ -19,12 +20,13 @@ const orderSchema = new mongoose.Schema({
     order_total: { type: mongoose.Types.Decimal128 },
     order_status: { 
         type: String, 
-        enum: ["Pending", "In Process", "In Delivery", "Completed", "Canceled", "Refunded"] 
+        enum: ["Pending", "In Process", "In Delivery", "Completed", "Canceled", "Refunded"],
+        default: "Pending"
     },
-    shipment_tracking_id: { type: String, maxlength: 100 },
+    shipment_tracking_id: { type: String, maxlength: 100, default: 'Not yet available' },
     est_delivery_date: { type: Date },
     order_items: [{
-        product_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Product' },
+        product: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Product' },
         qty: { type: Number, required: true },
         price_at_order: { type: mongoose.Types.Decimal128 }
     }]
