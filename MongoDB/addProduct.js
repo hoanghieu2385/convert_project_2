@@ -5,7 +5,7 @@ const Artist = require('../models/artist');
 const Supplier = require('../models/supplier');
 
 // Connect to your MongoDB database
-mongoose.connect('mongodb://localhost:27017/re_project_2', {
+mongoose.connect('mongodb+srv://nguyenphuclam16:lam12345@firstcluster.7robzgn.mongodb.net/Project', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
