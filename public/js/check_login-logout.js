@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function updateLoginStatus() {
-        fetch('../includes/check_login_status.php') // Call a PHP script to check login status
+        fetch('/check-login-status')
             .then(response => response.json())
             .then(data => {
                 if (data.isLoggedIn) {
@@ -18,17 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     logoutBtn.style.display = 'block';
                     loginBtn.style.display = 'none';
                     signUpLink.style.display = 'none';
-
                 } else {
                     orderHistoryLink.style.display = 'none';
                     accountDetailLink.style.display = 'none';
                     logoutBtn.style.display = 'none';
                     loginBtn.style.display = 'block';
                     signUpLink.style.display = 'block';
-
                 }
             });
     }
+    
     
     userIconBtn.addEventListener('mouseenter', function () { // Use mouseenter
         userMenu.classList.add('show'); // Add 'show' class
